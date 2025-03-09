@@ -1,5 +1,17 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
-export interface Theme {}
+export interface ClassedOptions {
+  base?: string
+}
 
-export const ThemeContext = createContext<Theme>({})
+export interface Theme {
+  components: Record<string, ClassedOptions>
+}
+
+export const ThemeContext = createContext<Theme | undefined>(undefined)
+
+export const useTheme = () => {
+  const theme = useContext(ThemeContext)
+  if (!theme) throw 'theme not found! Please wrap your App in a ThemeContext'
+  return theme
+}
