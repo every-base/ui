@@ -8,4 +8,10 @@ const theme = {
   }
 } as const satisfies Theme
 
+declare module '@everybase/ui' {
+  interface Types {
+    theme: typeof theme
+  }
+}
+
 export default theme
